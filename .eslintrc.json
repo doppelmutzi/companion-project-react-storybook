@@ -1,0 +1,24 @@
+{
+	"extends": [
+	  "prettier",
+	  "plugin:react/recommended"
+	],
+	"plugins": ["prettier"],
+	"rules": {
+	  "prettier/prettier": "error",
+	  "react/no-render-return-value": "off",
+	  "react/react-in-jsx-scope": "off",
+	  "react/prop-types": "off"
+	},
+	"parser": "@babel/eslint-parser",
+	"env": {
+	  "browser": true
+	},
+	"settings": {
+	  "react": {
+		"pragma": "React",
+		"version": "detect"
+	  }
+	}
+  }
+  
