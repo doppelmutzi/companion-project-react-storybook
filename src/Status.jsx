@@ -7,7 +7,12 @@ const Status = () => {
     if (!todo.checked) return count + 1;
     return count;
   }, 0);
-  return <div>{todosLeft} left</div>;
+  const label = todosLeft > 1 ? "items left" : "item left";
+  return (
+    <div>
+      {todosLeft} {label}
+    </div>
+  );
 };
 
 export default Status;

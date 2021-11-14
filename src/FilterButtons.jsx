@@ -4,10 +4,19 @@ import AppContext from "./AppContext";
 
 const Container = styled.div`
   display: flex;
+  > * + * {
+    margin-left: 16px;
+  }
 `;
 
 const FilterButton = styled.button`
-  background-color: ${(props) => (props.active ? "red" : "green")};
+  border-style: solid;
+  border-width: 1px;
+  border-color: ${(props) =>
+    props.active ? "rgba(175, 47, 47, 0.2)" : "transparent"};
+  padding: 4px;
+  border-radius: 3px;
+  background: none;
 `;
 
 const FilterButtons = () => {
