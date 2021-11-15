@@ -10,6 +10,14 @@
 	  "react/react-in-jsx-scope": "off",
 	  "react/prop-types": "off"
 	},
+	"overrides": [
+		{
+		  "files": [ "*.stories.jsx" ],
+		  "rules": {
+			"react/display-name": "off"
+		  }
+		}
+	],
 	"parser": "@babel/eslint-parser",
 	"env": {
 	  "browser": true
