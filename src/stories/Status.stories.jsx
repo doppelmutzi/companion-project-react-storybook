@@ -47,11 +47,12 @@ export default {
   },
 };
 
-const StatusComponent = ({ todosContextValue }) => {
+// 2. just spread args in provider value obj
+const StatusComponent = (args) => {
   return (
     <AppContext.Provider
       value={{
-        todos: todosContextValue,
+        ...args,
       }}
     >
       <Status />
@@ -63,7 +64,8 @@ const Template = (args) => <StatusComponent {...args} />;
 
 export const StatusBasic = Template.bind({});
 StatusBasic.argTypes = {
-  todosContextValue: {
+  // 1. name controls like context variables
+  todos: {
     name: "list of todos",
     description:
       "Variants of todo lists with different check states. Status component shows number of unchecked todos.",
@@ -107,9 +109,8 @@ StatusBasic.argTypes = {
 };
 
 export const StatusInteractive = Template.bind({});
-// TODO wie Name definieren?
 StatusInteractive.argTypes = {
-  todosContextValue: {
+  todos: {
     name: "list of todos",
     description: "Status component shows number of unchecked todos.",
     defaultValue: [{ id: Date.now(), label: "a todo", checked: false }],

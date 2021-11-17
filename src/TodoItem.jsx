@@ -20,6 +20,10 @@ const Item = styled.div`
   font-size: 24px;
   margin: 0 24px;
   text-decoration: ${(props) => (props.checked ? "line-through" : "normal")};
+  > div {
+    display: block;
+    font-size: 70%;
+  }
 `;
 
 const CheckButton = styled.button`
@@ -47,12 +51,15 @@ const DeleteButton = styled.button`
 const TodoItem = ({ todo }) => {
   const { todos, setTodos } = useContext(AppContext);
   const [hover, setHover] = useState(false);
+  const [checkHover, setCheckHover] = useState(false);
   return (
     <Container
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
     >
       <CheckButton
+        onMouseEnter={() => setCheckHover(true)}
+        onMouseLeave={() => setCheckHover(false)}
         onClick={() => {
           const index = todos.findIndex((item) => item.id === todo.id);
           const updatedTodos = [...todos];
@@ -63,16 +70,19 @@ const TodoItem = ({ todo }) => {
           setTodos(updatedTodos);
         }}
       >
-        <Check visible={todo.checked}>&#x02713;</Check>
+        <Check visible={todo.checked || checkHover}>✔️</Check>
       </CheckButton>
-      <Item checked={todo.checked || false}>{todo.label}</Item>
+      <Item checked={todo.checked || false}>
+        {todo.label}
+        <div>{todo.date}</div>
+      </Item>
       <DeleteButton
         visible={hover}
         onClick={() => {
           setTodos([...todos.filter((item) => item.id != todo.id)]);
         }}
       >
-        &#x02717;
+        ❌
       </DeleteButton>
     </Container>
   );

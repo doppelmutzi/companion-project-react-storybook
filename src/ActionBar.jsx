@@ -11,6 +11,8 @@ const Wrapper = styled.div`
   height: 50px;
   display: flex;
   align-items: center;
+  background-color: ${(props) => props.theme.bgColor};
+  color: ${(props) => props.theme.color};
 `;
 
 const Center = styled.div`
@@ -37,10 +39,10 @@ const DropShadow = styled.div`
 `;
 
 const ActionBar = () => {
-  const { todos } = useContext(AppContext);
+  const { todos, theme } = useContext(AppContext);
   return (
     <>
-      <Wrapper>
+      <Wrapper theme={theme}>
         <Status />
         <Center>
           <FilterButtons />

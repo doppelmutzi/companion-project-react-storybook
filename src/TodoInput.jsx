@@ -37,6 +37,7 @@ const TodoInput = () => {
               ...todos,
               {
                 id: Date.now(),
+                date: new Date(Date.now()).toDateString(),
                 label: value.trim(),
                 checked: false,
               },
