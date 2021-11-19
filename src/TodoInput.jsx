@@ -22,13 +22,14 @@ const Input = styled.input`
 `;
 
 const TodoInput = () => {
-  const { todos, setTodos } = useContext(AppContext);
+  const { todos, setTodos, translation } = useContext(AppContext);
+  const lang = translation.getPreferedLang();
   const inputRef = useRef("");
   return (
     <Container>
       <ToggleButton />
       <Input
-        placeholder="What needs to be done?"
+        placeholder={translation.todoInput.placeholder[lang]}
         ref={inputRef}
         onKeyDown={(evt) => {
           const { value } = evt.target;

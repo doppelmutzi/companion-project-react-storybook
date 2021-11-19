@@ -2,7 +2,7 @@ import styled, { createGlobalStyle } from "styled-components";
 import Headline from "./Headline";
 import Todos from "./Todos";
 
-const GlobalStyle = createGlobalStyle`
+export const GlobalStyle = createGlobalStyle`
     * {
         margin: 0;
         padding: 0;
