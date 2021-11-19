@@ -1,100 +1,70 @@
-import TodoInput from "../TodoInput";
-import { GlobalStyle } from "../App";
-import AppContext from "../AppContext";
+import TodoItem from "../TodoItem";
 
 import { StorySpecificContainer, StyleAndContextProvider } from "./storyHelper";
 
-// meta data https://storybook.js.org/docs/react/api/csf#default-export
 export default {
-  component: TodoInput,
-  title: "Todo input component",
+  component: TodoItem,
+  title: "Todo item",
 };
 
-const TodoInputWithProvider = (args) => (
-  <StyleAndContextProvider {...args}>
+const exampleTodo = {
+  id: 1,
+  date: new Date(Date.now()).toDateString(),
+  label: "hello",
+  checked: false,
+};
+
+const TodoItemWithProvider = ({ label, checked, date, ...ctxValues }) => (
+  <StyleAndContextProvider {...ctxValues}>
     <StorySpecificContainer styles={{ width: 750 }}>
-      <TodoInput />
+      <TodoItem
+        todo={{
+          ...exampleTodo,
+          date: new Date(date).toDateString(),
+          label,
+          checked,
+        }}
+      />
     </StorySpecificContainer>
   </StyleAndContextProvider>
 );
 
-const translationControl = {
-  name: "app language",
-  description: "TODO",
-  defaultValue: "en",
-  table: {
-    type: { summary: "TODO" },
-    defaultValue: { summary: "English" },
-  },
-  options: ["en", "de"],
-  mapping: {
-    en: {
-      getPreferedLang: () => "en",
-      todoInput: {
-        placeholder: {
-          en: "What needs to be done?",
-        },
-      },
-    },
-    de: {
-      getPreferedLang: () => "de",
-      todoInput: {
-        placeholder: {
-          de: "Was muss getan werden?",
-        },
-      },
-    },
-  },
-  control: {
-    type: "select", // Type 'select' is automatically inferred when 'options' is defined
-    labels: {
-      // 'labels' maps option values to string labels
-      en: "🇺🇸",
-      de: "🇩🇪",
-    },
+// provide context to prevent crashes in event handlers
+const ctxProps = {
+  todos: [{ ...exampleTodo }],
+  setTodos: () => {
+    //mock impl
   },
 };
 
-export const NoTodoInList = (args) => (
-  <TodoInputWithProvider {...args} todos={[]} />
+export const InitiallyUnchecked = (args) => (
+  <TodoItemWithProvider {...args} {...ctxProps} />
 );
 
-NoTodoInList.argTypes = {
-  translation: translationControl,
+InitiallyUnchecked.argTypes = {
+  date: { control: "date" },
 };
 
-export const SingleUncheckedTodoInList = (args) => (
-  <TodoInputWithProvider
-    {...args}
-    todos={[
-      {
-        checked: false,
-      },
-    ]}
-    setTodos={() => {
-      // mock
-    }}
-  />
-);
-
-SingleUncheckedTodoInList.argTypes = {
-  translation: translationControl,
+InitiallyUnchecked.args = {
+  label: "read a LogRocket article",
+  date: new Date(),
+  checked: false,
 };
 
-export const SingleCheckedTodoInList = (args) => (
-  <TodoInputWithProvider
-    {...args}
-    todos={[
-      {
-        checked: true,
-      },
-    ]}
-    setTodos={() => {
-      // mock
-    }}
-  />
+const checkedCtxProps = {
+  ...ctxProps,
+  todos: [{ ...exampleTodo, checked: true }],
+};
+
+export const InitiallyChecked = (args) => (
+  <TodoItemWithProvider {...args} {...ctxProps} />
 );
 
-SingleCheckedTodoInList.argTypes = {
-  translation: translationControl,
+InitiallyChecked.argTypes = {
+  ...InitiallyUnchecked.argTypes,
+};
+
+InitiallyChecked.args = {
+  ...InitiallyUnchecked.args,
+  checked: true,
 };
