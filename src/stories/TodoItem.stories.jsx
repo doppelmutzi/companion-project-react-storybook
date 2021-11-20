@@ -1,6 +1,10 @@
 import TodoItem from "../TodoItem";
 
-import { StorySpecificContainer, StyleAndContextProvider } from "./storyHelper";
+import {
+  StorySpecificContainer,
+  StyleAndContextProvider,
+  commonStoryContainerWidth,
+} from "./storyHelper";
 
 export default {
   component: TodoItem,
@@ -16,7 +20,7 @@ const exampleTodo = {
 
 const TodoItemWithProvider = ({ label, checked, date, ...ctxValues }) => (
   <StyleAndContextProvider {...ctxValues}>
-    <StorySpecificContainer styles={{ width: 750 }}>
+    <StorySpecificContainer styles={{ width: commonStoryContainerWidth }}>
       <TodoItem
         todo={{
           ...exampleTodo,
@@ -42,7 +46,15 @@ export const InitiallyUnchecked = (args) => (
 );
 
 InitiallyUnchecked.argTypes = {
-  date: { control: "date" },
+  date: {
+    name: "creation date",
+    description: "Creation date of an todo entry.",
+    table: {
+      type: { summary: "Date.toDateString() result" },
+      defaultValue: { summary: "Date.now()" },
+    },
+    control: "date",
+  },
 };
 
 InitiallyUnchecked.args = {
@@ -62,9 +74,23 @@ export const InitiallyChecked = (args) => (
 
 InitiallyChecked.argTypes = {
   ...InitiallyUnchecked.argTypes,
+  checked: {
+    options: ["openTodo", "completedTodo"],
+    mapping: {
+      openTodo: false,
+      completedTodo: true,
+    },
+    control: {
+      type: "inline-radio", // Type 'select' is automatically inferred when 'options' is defined
+      labels: {
+        openTodo: "todo is open",
+        completedTodo: "todo is completed",
+      },
+    },
+  },
 };
 
 InitiallyChecked.args = {
   ...InitiallyUnchecked.args,
-  checked: true,
+  checked: "completedTodo",
 };

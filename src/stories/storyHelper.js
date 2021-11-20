@@ -1,6 +1,8 @@
 import { GlobalStyle } from "../App";
 import AppContext from "../AppContext";
 
+export const commonStoryContainerWidth = 750;
+
 export const StyleAndContextProvider = ({ children, ...argsAndCtxValues }) => (
   <AppContext.Provider
     value={{

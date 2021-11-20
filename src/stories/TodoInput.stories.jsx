@@ -18,10 +18,9 @@ const TodoInputWithProvider = (args) => (
 
 const translationControl = {
   name: "app language",
-  description: "TODO",
-  defaultValue: "en",
+  description: "Labels are displayed in English or German.",
   table: {
-    type: { summary: "TODO" },
+    type: { summary: "language code" },
     defaultValue: { summary: "English" },
   },
   options: ["en", "de"],
@@ -44,7 +43,7 @@ const translationControl = {
     },
   },
   control: {
-    type: "select", // Type 'select' is automatically inferred when 'options' is defined
+    type: "inline-radio",
     labels: {
       // 'labels' maps option values to string labels
       en: "🇺🇸",
@@ -53,12 +52,22 @@ const translationControl = {
   },
 };
 
+const additionalCtxValues = {
+  setTodos: () => {
+    // mock impl
+  },
+};
+
 export const NoTodoInList = (args) => (
-  <TodoInputWithProvider {...args} todos={[]} />
+  <TodoInputWithProvider {...args} todos={[]} {...additionalCtxValues} />
 );
 
 NoTodoInList.argTypes = {
   translation: translationControl,
+};
+
+NoTodoInList.args = {
+  translation: "en", // initial value / argTypes.defaultValue deprecated
 };
 
 export const SingleUncheckedTodoInList = (args) => (
@@ -69,14 +78,16 @@ export const SingleUncheckedTodoInList = (args) => (
         checked: false,
       },
     ]}
-    setTodos={() => {
-      // mock
-    }}
+    {...additionalCtxValues}
   />
 );
 
 SingleUncheckedTodoInList.argTypes = {
   translation: translationControl,
+};
+
+SingleUncheckedTodoInList.args = {
+  translation: "de",
 };
 
 export const SingleCheckedTodoInList = (args) => (
@@ -87,12 +98,14 @@ export const SingleCheckedTodoInList = (args) => (
         checked: true,
       },
     ]}
-    setTodos={() => {
-      // mock
-    }}
+    {...additionalCtxValues}
   />
 );
 
 SingleCheckedTodoInList.argTypes = {
   translation: translationControl,
+};
+
+SingleCheckedTodoInList.args = {
+  translation: "en",
 };

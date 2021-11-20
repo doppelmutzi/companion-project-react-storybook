@@ -22,34 +22,37 @@ const FilterButton = styled.button`
 `;
 
 const FilterButtons = () => {
-  const {
-    theme,
-    filteredTodos,
-    setFilteredTodos,
-    filterIndex,
-    setFilterIndex,
-  } = useContext(AppContext);
-
+  const { theme, setFilterIndex } = useContext(AppContext);
+  const [index, setIndex] = useState(0);
   return (
     <Container>
       <FilterButton
         theme={theme}
-        onClick={() => setFilterIndex(0)}
-        active={filterIndex === 0}
+        onClick={() => {
+          setIndex(0);
+          setFilterIndex(0);
+        }}
+        active={index === 0}
       >
         All
       </FilterButton>
       <FilterButton
         theme={theme}
-        onClick={() => setFilterIndex(1)}
-        active={filterIndex === 1}
+        onClick={() => {
+          setIndex(1);
+          setFilterIndex(1);
+        }}
+        active={index === 1}
       >
         Active
       </FilterButton>
       <FilterButton
         theme={theme}
-        onClick={() => setFilterIndex(2)}
-        active={filterIndex === 2}
+        onClick={() => {
+          setIndex(2);
+          setFilterIndex(2);
+        }}
+        active={index === 2}
       >
         Completed
       </FilterButton>

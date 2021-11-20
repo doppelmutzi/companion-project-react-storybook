@@ -19,10 +19,12 @@ const Button = ({ width, variant, label, transform, emoji, ...restOfArgs }) => (
 export default {
   title: "Button",
   component: Button,
+  args: {
+    background: "green",
+  },
   argTypes: {
     background: {
       control: "color",
-      defaultValue: "green",
     },
     variant: {
       options: ["primary", "secondary"],
