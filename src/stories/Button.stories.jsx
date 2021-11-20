@@ -103,35 +103,3 @@ FilterButtonDarkMode.args = {
   active: true,
   theme: "dark",
 };
-
-/*
-Template.args = {
-  contentText: ["content1", "content2"],
-  size: "normal",
-  label: "Button",
-  transform: "none",
-};
-
-export const Primary = Template.bind({});
-Primary.args = {
-  ...Template.args,
-  variant: "primary",
-};
-
-export const Secondary = Template.bind({});
-Secondary.args = {
-  ...Template.args,
-};
-
-export const Large = Template.bind({});
-Large.args = {
-  ...Template.args,
-  size: "large",
-};
-
-export const Small = Template.bind({});
-Small.args = {
-  ...Template.args,
-  size: "small",
-};
-*/
