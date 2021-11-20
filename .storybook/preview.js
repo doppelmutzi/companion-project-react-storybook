@@ -13,6 +13,10 @@ export const parameters = {
         name: 'doppelmutzi',
         value: '#F5F5F5',
       },
+      {
+        name: 'doppelmutzi dark',
+        value: '#6E7582',
+      },
     ],
   },
 }

@@ -1,6 +1,7 @@
 import { useContext, useState } from "react";
 import styled from "styled-components";
 import AppContext from "./AppContext";
+import DeleteButton from "./DeleteButton";
 
 const Container = styled.div`
   height: 30px;
@@ -42,12 +43,6 @@ const Check = styled.span`
   display: ${(props) => (props.visible ? "block" : "none")};
 `;
 
-const DeleteButton = styled.button`
-  border: none;
-  font-size: 30px;
-  display: ${(props) => (props.visible ? "block" : "none")};
-`;
-
 const TodoItem = ({ todo }) => {
   const { todos, setTodos } = useContext(AppContext);
   const [hover, setHover] = useState(false);
@@ -76,14 +71,13 @@ const TodoItem = ({ todo }) => {
         {todo.label}
         <div>{todo.date}</div>
       </Item>
-      <DeleteButton
-        visible={hover}
-        onClick={() => {
-          setTodos([...todos.filter((item) => item.id != todo.id)]);
-        }}
-      >
-        ❌
-      </DeleteButton>
+      {hover && (
+        <DeleteButton
+          onClick={() => {
+            setTodos([...todos.filter((item) => item.id != todo.id)]);
+          }}
+        />
+      )}
     </Container>
   );
 };

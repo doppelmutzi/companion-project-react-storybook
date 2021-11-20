@@ -1,71 +1,110 @@
-import React from "react";
-
-const party = "🥳";
-const nerd = "🥸";
-const emojis = { party, nerd };
-
-const Button = ({ width, variant, label, transform, emoji, ...restOfArgs }) => (
-  <button
-    style={{
-      width: width || "auto",
-      fontSize: variant === "primary" ? "24px" : "initial",
-      ...restOfArgs,
-    }}
-  >
-    {transform(label)} {emoji}
-  </button>
-);
+import FilterButton from "../FilterButton";
+import DeleteButton from "../DeleteButton";
+import { StorySpecificContainer, StyleAndContextProvider } from "./storyHelper";
+import theme from "../theme";
 
 export default {
-  title: "Button",
-  component: Button,
-  args: {
-    background: "green",
-  },
-  argTypes: {
-    background: {
-      control: "color",
+  title: "Buttons",
+};
+
+const containerStyles = {
+  width: "50vw",
+  padding: 10,
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+};
+
+const ButtonWithContainer = ({ component: Component, theme, ...args }) => (
+  <StyleAndContextProvider theme={theme}>
+    <StorySpecificContainer
+      styles={{
+        ...containerStyles,
+        backgroundColor: theme?.bgColor || "inherited",
+      }}
+    >
+      <Component {...args} />
+    </StorySpecificContainer>
+  </StyleAndContextProvider>
+);
+
+const DeleteButtonTemplate = (args) => (
+  <ButtonWithContainer component={DeleteButton} {...args} />
+);
+
+export const DeleteButtonDefault = DeleteButtonTemplate.bind({});
+
+DeleteButtonDefault.args = {
+  label: "❌",
+};
+
+export const DeleteButtonEmoji = DeleteButtonTemplate.bind({});
+
+DeleteButtonEmoji.argTypes = {
+  label: {
+    options: ["emoji1", "emoji2", "emoji3", "emoji4"],
+    mapping: {
+      emoji1: "❌",
+      emoji2: "❎",
+      emoji3: "✖️",
+      emoji4: "☢️",
     },
-    variant: {
-      options: ["primary", "secondary"],
-      // control: { type: "radio" },
-      control: "radio",
-    },
-    emoji: {
-      options: Object.keys(emojis),
-      mapping: emojis, // Maps serializable option values to complex arg values
-      control: {
-        type: "select", // Type 'select' is automatically inferred when 'options' is defined
-        labels: {
-          // 'labels' maps option values to string labels
-          party: "party hard",
-          nerd: "nerd zone",
-        },
+    control: {
+      type: "inline-radio",
+      labels: {
+        emoji1: "❌",
+        emoji2: "❎",
+        emoji3: "✖️",
+        emoji4: "☢️",
       },
-    },
-    transform: {
-      options: ["none", "upper_case", "lower_case"],
-      mapping: {
-        none: (value) => value,
-        upper_case: (value) => value.toUpperCase(),
-        lower_case: (value) => value.toLowerCase(),
-      },
-      control: {
-        type: "radio",
-        labels: {
-          upper_case: "to upper case",
-          lower_case: "to lower case",
-        },
-      },
-    },
-    width: {
-      control: { type: "range", min: 400, max: 1200, step: 50 },
     },
   },
 };
 
-const Template = (args) => <Button {...args} />;
+DeleteButtonEmoji.args = {
+  label: "emoji4",
+};
 
+export const FilterButtonDefault = (args) => (
+  <ButtonWithContainer component={FilterButton} {...args} />
+);
+
+FilterButtonDefault.args = {
+  label: "a label",
+  active: false,
+};
+
+export const FilterButtonDarkMode = (args) => (
+  <ButtonWithContainer component={FilterButton} {...args} />
+);
+
+FilterButtonDarkMode.argTypes = {
+  theme: {
+    name: "theme variant",
+    description:
+      "There exists a dark and light theme with different background and foreground colors.",
+    options: ["light", "dark"],
+    mapping: {
+      light: theme.LIGHT,
+      dark: theme.DARK,
+    },
+    control: {
+      type: "radio",
+      labels: {
+        light: "light theme",
+        dark: "dark theme",
+      },
+    },
+  },
+};
+
+FilterButtonDarkMode.args = {
+  label: "a label",
+  active: true,
+  theme: "dark",
+};
+
+/*
 Template.args = {
   contentText: ["content1", "content2"],
   size: "normal",
@@ -95,3 +134,4 @@ Small.args = {
   ...Template.args,
   size: "small",
 };
+*/

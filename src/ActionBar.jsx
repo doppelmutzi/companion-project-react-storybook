@@ -39,7 +39,7 @@ const DropShadow = styled.div`
 `;
 
 const ActionBar = () => {
-  const { todos, theme } = useContext(AppContext);
+  const { todos, setTodos, theme } = useContext(AppContext);
   return (
     <>
       <Wrapper theme={theme}>
@@ -47,7 +47,14 @@ const ActionBar = () => {
         <Center>
           <FilterButtons />
         </Center>
-        {todos.filter((todo) => todo.checked).length > 0 && <ClearButton />}
+        {todos.filter((todo) => todo.checked).length > 0 && (
+          <ClearButton
+            onClick={() => {
+              const uncheckedTodos = todos.filter((todo) => !todo.checked);
+              setTodos([...uncheckedTodos]);
+            }}
+          />
+        )}
       </Wrapper>
       <DropShadow />
     </>

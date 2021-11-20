@@ -1,6 +1,4 @@
 import styled from "styled-components";
-import { useContext } from "react";
-import AppContext from "./AppContext";
 
 const Button = styled.a`
   padding: 4px 0;
@@ -10,18 +8,8 @@ const Button = styled.a`
   }
 `;
 
-const ClearButton = () => {
-  const { todos, setTodos } = useContext(AppContext);
-  return (
-    <Button
-      onClick={() => {
-        const uncheckedTodos = todos.filter((todo) => !todo.checked);
-        setTodos([...uncheckedTodos]);
-      }}
-    >
-      Clear completed
-    </Button>
-  );
+const ClearButton = ({ onClick }) => {
+  return <Button onClick={onClick}>Clear completed</Button>;
 };
 
 export default ClearButton;

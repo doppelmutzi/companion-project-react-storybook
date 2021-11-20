@@ -1,6 +1,10 @@
 import TodoInput from "../TodoInput";
 
-import { StorySpecificContainer, StyleAndContextProvider } from "./storyHelper";
+import {
+  StorySpecificContainer,
+  StyleAndContextProvider,
+  commonStoryContainerWidth,
+} from "./storyHelper";
 
 // meta data https://storybook.js.org/docs/react/api/csf#default-export
 export default {
@@ -10,7 +14,7 @@ export default {
 
 const TodoInputWithProvider = (args) => (
   <StyleAndContextProvider {...args}>
-    <StorySpecificContainer styles={{ width: 750 }}>
+    <StorySpecificContainer styles={{ width: commonStoryContainerWidth }}>
       <TodoInput />
     </StorySpecificContainer>
   </StyleAndContextProvider>
