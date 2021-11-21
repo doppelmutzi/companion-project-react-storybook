@@ -63,11 +63,6 @@ InitiallyUnchecked.args = {
   checked: false,
 };
 
-const checkedCtxProps = {
-  ...ctxProps,
-  todos: [{ ...exampleTodo, checked: true }],
-};
-
 export const InitiallyChecked = (args) => (
   <TodoItemWithProvider {...args} {...ctxProps} />
 );
