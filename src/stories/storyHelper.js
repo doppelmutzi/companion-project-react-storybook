@@ -3,10 +3,10 @@ import AppContext from "../AppContext";
 
 export const commonStoryContainerWidth = 750;
 
-export const StyleAndContextProvider = ({ children, ...argsAndCtxValues }) => (
+export const StyleAndContextProvider = ({ children, ...ctxValues }) => (
   <AppContext.Provider
     value={{
-      ...argsAndCtxValues,
+      ...ctxValues,
     }}
   >
     <GlobalStyle />
