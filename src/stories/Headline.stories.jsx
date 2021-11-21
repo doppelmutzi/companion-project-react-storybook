@@ -6,3 +6,6 @@ export default {
 };
 
 export const Basic = ({ color }) => <Headline color={color} />;
+Basic.args = {
+  color: "#516dd0",
+};
