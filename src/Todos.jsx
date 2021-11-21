@@ -21,7 +21,7 @@ const Todos = () => {
         setTodos,
         filterIndex,
         setFilterIndex,
-        theme: theme.DARK,
+        theme: theme.LIGHT,
         translation,
       }}
     >
