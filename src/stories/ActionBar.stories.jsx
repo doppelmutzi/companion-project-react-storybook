@@ -99,7 +99,7 @@ Interactive.argTypes = {
       dark: theme.DARK,
     },
     control: {
-      type: "radio",
+      type: "select",
       labels: {
         light: "light theme",
         dark: "dark theme",
